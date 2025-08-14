@@ -7,7 +7,7 @@
     <title>Demo Modelos 3D</title>
     <!-- Using the simple model-viewer import as per documentation -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
-    <style>
+    <!-- <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -63,7 +63,7 @@
                 height: 300px;
             }
         }
-    </style>
+    </style> -->
 </head>
 
 <body>
@@ -125,6 +125,17 @@
                     alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
                     src="assests/PLATO_CACHETE.glb" ar environment-image="assests/PLATO_CACHETE.glb"
                     poster="assests/PLATO_CACHETE.glb" shadow-intensity="1" camera-controls touch-action="pan-y">
+                </model-viewer>
+            </div>
+
+            <div class="model-container">
+                <!-- Use it like any other HTML element -->
+                <model-viewer ar camera-controls touch-action="pan-y" auto-rotate src="assests/PLATO_CACHETE.glb"
+                    alt="A 3D model of an astronaut">
+                    <button slot="ar-button"
+                        style="background-color: white; border-radius: 4px; border: none; position: absolute; top: 16px; right: 16px; ">
+                        👋 Activate AR
+                    </button>
                 </model-viewer>
             </div>
 
