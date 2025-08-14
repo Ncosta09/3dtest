@@ -67,81 +67,43 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Demo de Modelos 3D</h1>
 
-        <div class="models-grid">
-            <!-- Direct model-viewer implementation as per documentation -->
-            <div class="model-container">
-                <model-viewer src="assests/PLATO_CACHETE.glb" ar ar-modes="webxr scene-viewer quick-look"
-                    camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1">
-                    <div class="progress-bar hide" slot="progress-bar">
-                        <div class="update-bar"></div>
-                    </div>
-                    <button slot="ar-button" id="ar-button">
-                        View in your space
-                    </button>
-                    <div id="ar-prompt">
-                        <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
-                    </div>
-                </model-viewer>
-            </div>
+    <model-viewer id="model-viewer" src="assests/PLATO_RISOTTO.glb" ar ar-modes="scene-viewer quick-look"
+        camera-controls touch-action="pan-y" alt="A 3D model of an astronaut" shadow-intensity="2" auto-rotate
+        disable-pan skybox-image="https://www.pngkey.com/png/detail/147-1473883_404-error-404-not-found-png.png"
+        skybox-height="2m" max-camera-orbit="auto 90deg auto">
+        <div id="error" class="hide">AR is not supported on this device</div>
+    </model-viewer>
+    <script>
+        document.querySelector("#model-viewer").addEventListener('ar-status', (event) => {
+            if (event.detail.status === 'failed') {
+                const error = document.querySelector("#error");
+                error.classList.remove('hide');
+                error.addEventListener('transitionend', (event) => {
+                    error.classList.add('hide');
+                });
+            }
+        });
+    </script>
+    <style>
+        #error {
+            background-color: #ffffffdd;
+            border-radius: 16px;
+            padding: 16px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            transition: opacity 0.3s;
+        }
 
-            <div class="model-container">
-                <model-viewer src="assests/PLATO_MILANESA.glb" ar ar-modes="webxr scene-viewer quick-look"
-                    camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1">
-                    <div class="progress-bar hide" slot="progress-bar">
-                        <div class="update-bar"></div>
-                    </div>
-                    <button slot="ar-button" id="ar-button">
-                        View in your space
-                    </button>
-                    <div id="ar-prompt">
-                        <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
-                    </div>
-                </model-viewer>
+        #error.hide {
+            opacity: 0;
+            visibility: hidden;
+            transition: visibility 2s, opacity 1s 1s;
+        }
+    </style>
 
-            </div>
-
-            <div class="model-container">
-                <model-viewer src="assests/PLATO_RISOTTO.glb" ar ar-modes="webxr scene-viewer quick-look"
-                    camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1">
-                    <div class="progress-bar hide" slot="progress-bar">
-                        <div class="update-bar"></div>
-                    </div>
-                    <button slot="ar-button" id="ar-button">
-                        View in your space
-                    </button>
-                    <div id="ar-prompt">
-                        <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
-                    </div>
-                </model-viewer>
-
-            </div>
-
-            <div class="model-container">
-                <!-- Use it like any other HTML element -->
-                <model-viewer
-                    alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
-                    src="assests/PLATO_CACHETE.glb" ar environment-image="assests/PLATO_CACHETE.glb"
-                    poster="assests/PLATO_CACHETE.glb" shadow-intensity="1" camera-controls touch-action="pan-y">
-                </model-viewer>
-            </div>
-
-            <div class="model-container">
-                <!-- Use it like any other HTML element -->
-                <model-viewer ar camera-controls touch-action="pan-y" auto-rotate src="assests/PLATO_CACHETE.glb"
-                    alt="A 3D model of an astronaut">
-                    <button slot="ar-button"
-                        style="background-color: white; border-radius: 4px; border: none; position: absolute; top: 16px; right: 16px; ">
-                        👋 Activate AR
-                    </button>
-                </model-viewer>
-            </div>
-
-
-        </div>
-    </div>
 </body>
 
 </html>
